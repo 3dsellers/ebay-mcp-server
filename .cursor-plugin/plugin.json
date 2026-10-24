@@ -7,7 +7,7 @@
     "email": "support@3dsellers.com"
   },
   "homepage": "https://www.3dsellers.com/channel-integration/3dsellers-mcp",
-  "repository": "https://github.com/3dsellers/3dsellers-mcp",
+  "repository": "https://github.com/3dsellers/ebay-mcp-server",
   "license": "MIT",
   "keywords": ["ebay", "amazon", "walmart", "etsy", "shopify", "tiktok-shop", "ecommerce", "listings", "orders", "inventory"],
   "logo": "assets/logo.svg",
