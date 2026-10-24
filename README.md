@@ -173,7 +173,7 @@ Add this to `cline_mcp_settings.json` (Cline > MCP Servers > Configure):
 Install the extension, then sign in with your 3Dsellers account:
 
 ```bash
-gemini extensions install https://github.com/3dsellers/3dsellers-mcp
+gemini extensions install https://github.com/3dsellers/ebay-mcp-server
 ```
 
 In Gemini CLI, run `/mcp auth 3dsellers` to sign in. Or add the server with a token:
@@ -215,7 +215,7 @@ Step-by-step guide with screenshots: [How to connect AI agents to 3Dsellers usin
 | Cursor | [Cursor Directory](https://cursor.directory/plugins/3dsellers) or `~/.cursor/mcp.json` | Bearer token |
 | VS Code (GitHub Copilot) | `.vscode/mcp.json` or MCP: Add Server | Bearer token |
 | Cline | `cline_mcp_settings.json` | Bearer token |
-| Gemini CLI | `gemini extensions install https://github.com/3dsellers/3dsellers-mcp` | OAuth or bearer token |
+| Gemini CLI | `gemini extensions install https://github.com/3dsellers/ebay-mcp-server` | OAuth or bearer token |
 | Kiro | `.kiro/settings/mcp.json` | OAuth |
 | Windsurf, Codex CLI, Perplexity, Mistral Le Chat | Server URL `https://api.3dsellers.com/mcp` | OAuth or bearer token |
 
