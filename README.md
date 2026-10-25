@@ -6,14 +6,14 @@
 
 # 3Dsellers MCP Server for eBay and Ecommerce Sellers
 
-**The hosted eBay MCP server for ecommerce sellers. Connect Claude, ChatGPT, Cursor, VS Code or any MCP-compatible AI assistant to your eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores, and manage listings, products, inventory, orders and buyer messages from a chat. 150+ tools. Nothing to install, no code and no eBay developer account.**
+**The hosted eBay MCP server for ecommerce sellers. Connect Claude, ChatGPT, Cursor, VS Code or any MCP-compatible AI assistant to your eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores, and manage listings, products, inventory, orders and buyer messages from a chat. 120+ tools. Nothing to install, no code and no eBay developer account.**
 
 [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-com.3dsellers%2Fmcp-2D72E8)](https://registry.modelcontextprotocol.io/v0/servers?search=3dsellers)
 [![Claude connector directory](https://img.shields.io/badge/Claude-connector%20directory-D97757)](https://claude.ai/new#directory/connectors/3dsellers-mcp)
 [![Cursor Directory](https://img.shields.io/badge/Cursor-Directory-000000)](https://cursor.directory/plugins/3dsellers)
 ![eBay](https://img.shields.io/badge/eBay-MCP%20server-E53238)
 ![Ecommerce](https://img.shields.io/badge/ecommerce-eBay%20%7C%20Amazon%20%7C%20Walmart%20%7C%20Etsy%20%7C%20Shopify%20%7C%20TikTok%20Shop-2D72E8)
-![Tools](https://img.shields.io/badge/tools-150%2B-8957e5)
+![Tools](https://img.shields.io/badge/tools-120%2B-8957e5)
 ![Transport](https://img.shields.io/badge/transport-streamable%20HTTP-blue)
 ![Auth](https://img.shields.io/badge/auth-OAuth%20%7C%20bearer%20token-green)
 
@@ -49,7 +49,7 @@ This repository holds the documentation and config examples. The server itself i
 
 ## Features
 
-- **150+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, listing templates and buyer messages.
+- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, listing templates and buyer messages.
 - **eBay and five more channels:** eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop from one product catalog. Publish a product from one channel to another in one request.
 - **Hosted, nothing to install:** no Node.js, no Docker, no eBay developer account and no marketplace API keys. 3Dsellers keeps the server up to date when marketplace APIs change.
 - **Works with any AI assistant:** Claude, ChatGPT, Grok, Claude Code, Cursor, VS Code, Cline, Gemini CLI, Kiro, Windsurf and any client that supports remote MCP servers.
@@ -252,7 +252,7 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 
 ## Tools
 
-150+ tools, grouped by area. **Read** tools only look at your data. **Write** tools make changes, and the assistant asks for your approval before it runs them.
+120+ tools, grouped by area. **Read** tools only look at your data. **Write** tools make changes, and the assistant asks for your approval before it runs them.
 
 ### Products & Catalog
 
