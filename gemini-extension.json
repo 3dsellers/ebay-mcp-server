@@ -1,7 +1,7 @@
 {
   "name": "3dsellers",
   "version": "1.0.0",
-  "description": "Run eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores from your AI assistant. 150+ tools, hosted, no code.",
+  "description": "Run eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores from your AI assistant. 120+ tools, hosted, no code.",
   "mcpServers": {
     "3dsellers": {
       "httpUrl": "https://api.3dsellers.com/mcp"

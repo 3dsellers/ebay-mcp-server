@@ -35,6 +35,7 @@ This repository holds the documentation and config examples. The server itself i
 - [Demo](#demo)
 - [Quick start](#quick-start)
 - [Connect your AI assistant](#connect-your-ai-assistant)
+- [Claude Code plugin](#claude-code-plugin)
 - [MCP client compatibility](#mcp-client-compatibility)
 - [What you can ask](#what-you-can-ask)
 - [Channels](#channels)
@@ -52,6 +53,7 @@ This repository holds the documentation and config examples. The server itself i
 - **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, listing templates and buyer messages.
 - **eBay and five more channels:** eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop from one product catalog. Publish a product from one channel to another in one request.
 - **Hosted, nothing to install:** no Node.js, no Docker, no eBay developer account and no marketplace API keys. 3Dsellers keeps the server up to date when marketplace APIs change.
+- **Claude Code plugin:** one install adds the MCP server plus skills and slash commands for listings, orders, inventory, bulk edits and buyer messages. See [Claude Code plugin](#claude-code-plugin).
 - **Works with any AI assistant:** Claude, ChatGPT, Grok, Claude Code, Cursor, VS Code, Cline, Gemini CLI, Kiro, Windsurf and any client that supports remote MCP servers.
 - **Sign in with OAuth:** chat apps connect with your 3Dsellers login, with no token to copy. Developer tools can use a bearer token.
 - **You stay in control:** scoped tokens, approval before any tool that changes data, a log of every call, and one-click revoke.
@@ -146,6 +148,22 @@ Add this to `.vscode/mcp.json`, or run **MCP: Add Server** from the Command Pale
 
 #### Claude Code
 
+Option 1, the plugin. It adds the MCP server and the skills and slash commands described in [Claude Code plugin](#claude-code-plugin):
+
+```text
+/plugin marketplace add 3dsellers/ebay-mcp-server
+/plugin install 3dsellers@3dsellers
+```
+
+Then put your token in the `THREEDSELLERS_MCP_TOKEN` environment variable and restart Claude Code:
+
+```bash
+export THREEDSELLERS_MCP_TOKEN="YOUR_TOKEN_HERE"   # macOS / Linux, add it to ~/.zshrc or ~/.bashrc
+setx THREEDSELLERS_MCP_TOKEN "YOUR_TOKEN_HERE"      # Windows, then open a new terminal
+```
+
+Option 2, the server only:
+
 ```bash
 claude mcp add --transport http 3dsellers https://api.3dsellers.com/mcp --header "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
@@ -204,6 +222,46 @@ Ready-to-copy files are in [`examples/`](examples/).
 
 Step-by-step guide with screenshots: [How to connect AI agents to 3Dsellers using MCP](https://help.3dsellers.com/en/articles/15433466-how-to-connect-ai-agents-to-3dsellers-using-mcp).
 
+## Claude Code plugin
+
+The `plugins/3dsellers` folder of this repository is a [Claude Code plugin](https://code.claude.com/docs/en/plugins). It contains no code: a manifest, the MCP server entry, six skills and five slash commands, all plain Markdown and JSON. The skills tell Claude which 3Dsellers tools to call, in which order, and where to stop and ask you.
+
+Install:
+
+```text
+/plugin marketplace add 3dsellers/ebay-mcp-server
+/plugin install 3dsellers@3dsellers
+```
+
+Set `THREEDSELLERS_MCP_TOKEN` to a token from **Settings > Profile > API / MCP > Connect MCP** (see [Claude Code](#claude-code) above), restart Claude Code and run `/3dsellers:status`.
+
+### Skills
+
+Claude loads a skill on its own when your request matches it. You can also start one by name.
+
+| Skill | What it does |
+| --- | --- |
+| `/3dsellers:create-listing` | Create a product and publish it to eBay or another channel, or cross-list existing products. Resolves the store, the category mapping and the required item specifics first. |
+| `/3dsellers:daily-orders` | New orders per store, orders to ship, tracking numbers (dry run first), invoices and tags, then the buyer messages waiting. |
+| `/3dsellers:bulk-edit` | Prices, item specifics, tags, policies, titles and quantities on many products or listings, with a dry run and a confirmed count before anything runs. |
+| `/3dsellers:inventory-check` | Low-stock products, warehouse stock compared with each channel, and quantity fixes. |
+| `/3dsellers:buyer-messages` | Unanswered buyer messages, returns and cases from the Helpdesk, with drafted replies that are sent only after your approval. |
+| `/3dsellers:account-status` | Connection check, connected accounts and their health, and what a 401, 403 or 429 means. |
+
+### Slash commands
+
+| Command | Example |
+| --- | --- |
+| `/3dsellers:orders [since]` | `/3dsellers:orders yesterday` |
+| `/3dsellers:messages [store]` | `/3dsellers:messages mystore_uk` |
+| `/3dsellers:list <item> to <store>` | `/3dsellers:list the blue Nike Air Max size 10 in my catalog to mystore_us` |
+| `/3dsellers:stock [threshold]` | `/3dsellers:stock 3` |
+| `/3dsellers:status` | `/3dsellers:status` |
+
+Every tool that changes data still asks for your approval before it runs, and every call is logged on the API / MCP page.
+
+To try the plugin from a local clone without installing it: `claude --plugin-dir ./plugins/3dsellers`. To check the files after a change: `claude plugin validate ./plugins/3dsellers`.
+
 ## MCP client compatibility
 
 | Client | How to connect | Sign-in |
@@ -211,7 +269,7 @@ Step-by-step guide with screenshots: [How to connect AI agents to 3Dsellers usin
 | Claude (claude.ai, Claude Desktop, Cowork) | Connector directory, or Settings > Connectors > Add custom connector | OAuth |
 | ChatGPT | Add an app with the server URL | OAuth |
 | Grok | grok.com/connectors > New Connector > Custom | OAuth |
-| Claude Code | `claude mcp add --transport http` | Bearer token |
+| Claude Code | [Plugin](#claude-code-plugin) `/plugin install 3dsellers@3dsellers`, or `claude mcp add --transport http` | Bearer token |
 | Cursor | [Cursor Directory](https://cursor.directory/plugins/3dsellers) or `~/.cursor/mcp.json` | Bearer token |
 | VS Code (GitHub Copilot) | `.vscode/mcp.json` or MCP: Add Server | Bearer token |
 | Cline | `cline_mcp_settings.json` | Bearer token |
