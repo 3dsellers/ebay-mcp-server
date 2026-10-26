@@ -1,0 +1,14 @@
+{
+  "name": "3dsellers",
+  "version": "1.0.0",
+  "description": "Run eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores from Claude Code. Connects the hosted 3Dsellers MCP server (120+ tools) and adds skills for listings, orders, inventory, bulk edits and buyer messages.",
+  "author": {
+    "name": "3Dsellers",
+    "email": "support@3dsellers.com",
+    "url": "https://www.3dsellers.com"
+  },
+  "homepage": "https://www.3dsellers.com/channel-integration/3dsellers-mcp",
+  "repository": "https://github.com/3dsellers/ebay-mcp-server",
+  "license": "MIT",
+  "keywords": ["ebay", "amazon", "walmart", "etsy", "shopify", "tiktok-shop", "ecommerce", "listings", "orders", "inventory", "mcp"]
+}
