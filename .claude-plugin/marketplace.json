@@ -1,0 +1,19 @@
+{
+  "name": "3dsellers",
+  "description": "3Dsellers plugins for Claude Code: eBay and multichannel selling through the hosted 3Dsellers MCP server.",
+  "owner": {
+    "name": "3Dsellers",
+    "email": "support@3dsellers.com",
+    "url": "https://www.3dsellers.com"
+  },
+  "plugins": [
+    {
+      "name": "3dsellers",
+      "source": "./plugins/3dsellers",
+      "description": "Run eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores from Claude Code. Connects the hosted 3Dsellers MCP server (120+ tools) and adds skills for listings, orders, inventory, bulk edits and buyer messages.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["ebay", "ecommerce", "mcp", "listings", "orders"]
+    }
+  ]
+}
