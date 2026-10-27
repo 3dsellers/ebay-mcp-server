@@ -155,12 +155,7 @@ Option 1, the plugin. It adds the MCP server and the skills and slash commands d
 /plugin install 3dsellers@3dsellers
 ```
 
-Then put your token in the `THREEDSELLERS_MCP_TOKEN` environment variable and restart Claude Code:
-
-```bash
-export THREEDSELLERS_MCP_TOKEN="YOUR_TOKEN_HERE"   # macOS / Linux, add it to ~/.zshrc or ~/.bashrc
-setx THREEDSELLERS_MCP_TOKEN "YOUR_TOKEN_HERE"      # Windows, then open a new terminal
-```
+Then run `/mcp`, pick `3dsellers` and choose Authenticate. A browser window opens for your 3Dsellers login (OAuth), so there is no token to copy.
 
 Option 2, the server only:
 
@@ -233,7 +228,7 @@ Install:
 /plugin install 3dsellers@3dsellers
 ```
 
-Set `THREEDSELLERS_MCP_TOKEN` to a token from **Settings > Profile > API / MCP > Connect MCP** (see [Claude Code](#claude-code) above), restart Claude Code and run `/3dsellers:status`.
+Sign in with OAuth the first time Claude calls a 3Dsellers tool, or run `/mcp`, pick `3dsellers` and choose Authenticate. Then run `/3dsellers:status`.
 
 ### Skills
 
