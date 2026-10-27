@@ -7,9 +7,9 @@ description: Check that the 3Dsellers MCP connection works, which marketplace ac
 
 ## 1. Is the MCP server connected?
 
-- Call `get-sellers`. A list of accounts means the token works.
-- `401` or "unauthorized": the token is missing or expired. The seller creates one in 3Dsellers under **Settings > Profile > API / MCP**, then sets it in the environment variable `THREEDSELLERS_MCP_TOKEN` and restarts Claude Code. Alternative without the plugin's server entry: `claude mcp add --transport http 3dsellers https://api.3dsellers.com/mcp --header "Authorization: Bearer <token>"`.
-- `403` with "Insufficient scope": the token was created with limited permissions. The seller creates a new token with the scopes the task needs (for example `order:write` for tracking, `helpdesk:write` for replies).
+- Call `get-sellers`. A list of accounts means the connection works.
+- `401`, "unauthorized" or "needs authentication": the seller is not signed in, or the sign-in expired. In Claude Code, run `/mcp`, pick `3dsellers` and choose Authenticate; a browser window opens for the 3Dsellers login. In Claude chat or Cowork, reconnect the 3Dsellers connector. Developer tools without OAuth can use a token instead: `claude mcp add --transport http 3dsellers https://api.3dsellers.com/mcp --header "Authorization: Bearer <token>"`, with the token from **Settings > Profile > API / MCP**.
+- `403` with "Insufficient scope": the sign-in or token does not include the permission the task needs. The seller signs in again and approves the permission, or creates a new token with the scopes the task needs (for example `order:write` for tracking, `helpdesk:write` for replies).
 - `403` about the subscription: the 3Dsellers account has no active plan or trial.
 - `429`: rate limit. Read `Retry-After`, wait that long, and do not retry sooner. Limits are shown live in the API / MCP page.
 
@@ -24,5 +24,5 @@ Group the tools for the seller in plain words: products and listings, inventory,
 
 ## Rules
 
-- Do not paste a token into chat or a file in the repo. It lives in the environment or in the user's own MCP config.
+- Do not ask for a password or token in chat, and never write one into a file. Sign-in happens in the browser through OAuth.
 - Every call the AI makes is logged in 3Dsellers under API / MCP > Requests, so the seller can review what happened.
