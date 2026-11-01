@@ -264,7 +264,7 @@ To try the plugin from a local clone without installing it: `claude --plugin-dir
 | Claude (claude.ai, Claude Desktop, Cowork) | Connector directory, or Settings > Connectors > Add custom connector | OAuth |
 | ChatGPT | Add an app with the server URL | OAuth |
 | Grok | grok.com/connectors > New Connector > Custom | OAuth |
-| Claude Code | [Plugin](#claude-code-plugin) `/plugin install 3dsellers@3dsellers`, or `claude mcp add --transport http` | Bearer token |
+| Claude Code | [Plugin](#claude-code-plugin) `/plugin install 3dsellers@3dsellers`, or `claude mcp add --transport http` | OAuth or bearer token |
 | Cursor | [Cursor Directory](https://cursor.directory/plugins/3dsellers) or `~/.cursor/mcp.json` | Bearer token |
 | VS Code (GitHub Copilot) | `.vscode/mcp.json` or MCP: Add Server | Bearer token |
 | Cline | `cline_mcp_settings.json` | Bearer token |
