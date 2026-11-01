@@ -29,7 +29,7 @@ Privacy policy: [www.3dsellers.com/privacy-policy](https://www.3dsellers.com/pri
 
 ```text
 /plugin marketplace add 3dsellers/ebay-mcp-server
-/plugin install 3dsellers@3dsellers
+/plugin install 3dsellers@3dsellers-mcp
 ```
 
 Then run `/3dsellers:status` to check the connection and see which stores are connected.
