@@ -152,7 +152,7 @@ Option 1, the plugin. It adds the MCP server and the skills and slash commands d
 
 ```text
 /plugin marketplace add 3dsellers/ebay-mcp-server
-/plugin install 3dsellers@3dsellers
+/plugin install 3dsellers@3dsellers-mcp
 ```
 
 Then run `/mcp`, pick `3dsellers` and choose Authenticate. A browser window opens for your 3Dsellers login (OAuth), so there is no token to copy.
@@ -225,7 +225,7 @@ Install:
 
 ```text
 /plugin marketplace add 3dsellers/ebay-mcp-server
-/plugin install 3dsellers@3dsellers
+/plugin install 3dsellers@3dsellers-mcp
 ```
 
 Sign in with OAuth the first time Claude calls a 3Dsellers tool, or run `/mcp`, pick `3dsellers` and choose Authenticate. Then run `/3dsellers:status`.
@@ -264,7 +264,7 @@ To try the plugin from a local clone without installing it: `claude --plugin-dir
 | Claude (claude.ai, Claude Desktop, Cowork) | Connector directory, or Settings > Connectors > Add custom connector | OAuth |
 | ChatGPT | Add an app with the server URL | OAuth |
 | Grok | grok.com/connectors > New Connector > Custom | OAuth |
-| Claude Code | [Plugin](#claude-code-plugin) `/plugin install 3dsellers@3dsellers`, or `claude mcp add --transport http` | OAuth or bearer token |
+| Claude Code | [Plugin](#claude-code-plugin) `/plugin install 3dsellers@3dsellers-mcp`, or `claude mcp add --transport http` | OAuth or bearer token |
 | Cursor | [Cursor Directory](https://cursor.directory/plugins/3dsellers) or `~/.cursor/mcp.json` | Bearer token |
 | VS Code (GitHub Copilot) | `.vscode/mcp.json` or MCP: Add Server | Bearer token |
 | Cline | `cline_mcp_settings.json` | Bearer token |
