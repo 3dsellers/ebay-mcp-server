@@ -50,7 +50,7 @@ This repository holds the documentation and config examples. The server itself i
 
 ## Features
 
-- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, eBay Promoted Listings campaigns, listing templates and buyer messages.
+- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, eBay Promoted Listings campaigns, eBay payouts and fees, feedback, listing templates and buyer messages.
 - **eBay and five more channels:** eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop from one product catalog. Publish a product from one channel to another in one request.
 - **Hosted, nothing to install:** no Node.js, no Docker, no eBay developer account and no marketplace API keys. 3Dsellers keeps the server up to date when marketplace APIs change.
 - **Claude Code plugin:** one install adds the MCP server plus skills and slash commands for listings, orders, inventory, bulk edits and buyer messages. See [Claude Code plugin](#claude-code-plugin).
@@ -288,6 +288,10 @@ The server uses streamable HTTP and supports OAuth 2.0 with dynamic client regis
 | Helpdesk | "Show unread buyer messages and draft a reply to each one." |
 | Automations | "Tag every order over $100 as VIP." |
 | eBay ads | "Show my Promoted Listings campaigns with their ad fees and sales, and pause the ones with no sales." |
+| eBay account | "How close am I to my eBay selling limit, and what is my seller level?" |
+| eBay payouts | "What did eBay pay out this month, and how much went to fees and refunds?" |
+| eBay fees | "What will eBay charge me to publish this draft?" |
+| Feedback | "Show the negative feedback I received and what I replied." |
 | Reports | "Export all active listings with price and quantity every Monday." |
 
 Tools that change data ask for your approval before they run.
@@ -338,6 +342,8 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 | Tool | What it does | Type |
 | --- | --- | --- |
 | `publish-products-to-channel` | Publish products to eBay, Amazon, Walmart, Etsy, Shopify or TikTok Shop. | Write |
+| `get-product-listing-fees` | Check what eBay would charge to publish a catalog product, before you publish it. | Read |
+| `get-listing-fees` | Check what eBay would charge to publish a draft, before you publish it. | Read |
 | `set-draft-details` | Fill in title, price, category and other listing details before you publish. | Write |
 | `set-item-specifics` | Set brand, MPN, color, size and other item specifics on listings. | Write |
 | `set-listing-tags` | Add or remove tags on listings. | Write |
@@ -348,6 +354,8 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 | `create-store-category` | Add a category to your eBay store. | Write |
 | `update-store-category` | Rename or move an eBay store category. | Write |
 | `delete-store-category` | Delete an eBay store category. | Write |
+
+The two fee checks ask eBay live and publish nothing. They return eBay's listing fees (insertion fee and upgrades such as Bold). The final value fee eBay takes when an item sells is not included.
 
 ### Inventory
 
@@ -498,6 +506,54 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 | `sync-ad-campaigns` | Refresh your campaigns from eBay. | Write |
 
 To add listings to a campaign, use `create-action` with the `node_listing_tool_promote_items` action. For results per listing or per day, use `create-export` with the eBay Ad Report. Priority (cost per click) campaigns can be listed, paused, resumed and ended here; create and edit them in eBay Seller Hub.
+
+### eBay Account & Seller Level
+
+| Tool | What it does | Type |
+| --- | --- | --- |
+| `get-selling-limits` | See your monthly eBay selling limits: how much is used and how much is left. | Read |
+| `get-seller-standards` | See your eBay seller level and the metrics behind it. | Read |
+| `get-ebay-account` | See your eBay Store subscription, your eBay programs and any identity check eBay is waiting for. | Read |
+| `get-promotions` | List your eBay coupons, sales and other promotions. | Read |
+| `get-ad-rate-recommendations` | Get the ad rate eBay suggests for each listing. | Read |
+
+All five are read live from eBay.
+
+### eBay Payouts & Finances
+
+| Tool | What it does | Type |
+| --- | --- | --- |
+| `get-ebay-payouts` | List the payouts eBay sent to your bank. | Read |
+| `get-ebay-payout` | Get one payout. | Read |
+| `get-ebay-payout-summary` | Get the number and total of your payouts for a period. | Read |
+| `get-ebay-funds` | See your available, processing and on-hold funds on eBay. | Read |
+| `get-ebay-transactions` | List every sale, refund, fee, shipping label and dispute, with the eBay fees taken on each. | Read |
+| `get-ebay-transaction-summary` | Get totals per kind of transaction for a period. | Read |
+| `get-ebay-transfer` | See a charge eBay took from you to cover a refund or a dispute. | Read |
+| `get-payment-disputes` | List payment disputes (chargebacks) and the date eBay needs your answer by. | Read |
+| `get-payment-dispute` | Get one payment dispute with the evidence eBay asked for. | Read |
+
+This is your own money on eBay: what eBay collects from your buyers and pays out to you. It is read live from eBay and is not your 3Dsellers billing. Payment disputes are read only; answer them in eBay Seller Hub.
+
+### Feedback
+
+| Tool | What it does | Type |
+| --- | --- | --- |
+| `get-feedback` | List the eBay feedback you received or left, with ratings and replies. | Read |
+| `leave-feedback` | Leave positive feedback for the buyer of an order. | Write |
+| `reply-to-feedback` | Post a reply to feedback a buyer left. | Write |
+
+Feedback you leave and replies you post are public on eBay and cannot be edited afterwards.
+
+### Blocked Buyers
+
+| Tool | What it does | Type |
+| --- | --- | --- |
+| `get-blocked-buyers` | List the buyers on your 3Dsellers Blocked List. | Read |
+| `block-buyers` | Add buyers to the Blocked List. | Write |
+| `unblock-buyers` | Take buyers off the Blocked List. | Write |
+
+The Blocked List is a 3Dsellers list. A buyer on it gets no automatic messages and no feedback reminders. It does not block the buyer on eBay.
 
 ### Listing Designer
 
