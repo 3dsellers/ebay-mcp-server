@@ -6,14 +6,15 @@
 
 # 3Dsellers MCP Server for eBay and Ecommerce Sellers
 
-**The hosted eBay MCP server for ecommerce sellers. Connect Claude, ChatGPT, Cursor, VS Code or any MCP-compatible AI assistant to your eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores, and manage listings, products, inventory, orders and buyer messages from a chat. 120+ tools. Nothing to install, no code and no eBay developer account.**
+**The hosted eBay MCP server for ecommerce sellers. Connect Claude, ChatGPT, Cursor, VS Code or any MCP-compatible AI assistant to your eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop stores, and manage listings, products, inventory, orders and buyer messages from a chat. 170+ tools. Nothing to install, no code and no eBay developer account.**
 
 [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-com.3dsellers%2Fmcp-2D72E8)](https://registry.modelcontextprotocol.io/v0/servers?search=3dsellers)
 [![Claude connector directory](https://img.shields.io/badge/Claude-connector%20directory-D97757)](https://claude.ai/new#directory/connectors/3dsellers-mcp)
 [![Cursor Directory](https://img.shields.io/badge/Cursor-Directory-000000)](https://cursor.directory/plugins/3dsellers)
+[![npm](https://img.shields.io/npm/v/3dsellers-mcp?label=npm%203dsellers-mcp)](https://www.npmjs.com/package/3dsellers-mcp)
 ![eBay](https://img.shields.io/badge/eBay-MCP%20server-E53238)
 ![Ecommerce](https://img.shields.io/badge/ecommerce-eBay%20%7C%20Amazon%20%7C%20Walmart%20%7C%20Etsy%20%7C%20Shopify%20%7C%20TikTok%20Shop-2D72E8)
-![Tools](https://img.shields.io/badge/tools-120%2B-8957e5)
+![Tools](https://img.shields.io/badge/tools-170%2B-8957e5)
 ![Transport](https://img.shields.io/badge/transport-streamable%20HTTP-blue)
 ![Auth](https://img.shields.io/badge/auth-OAuth%20%7C%20bearer%20token-green)
 
@@ -27,10 +28,19 @@ https://api.3dsellers.com/mcp
 
 3Dsellers is a multichannel ecommerce platform for eBay sellers. It keeps one product catalog for every channel you sell on. Connect the MCP server once and your AI assistant can search and create products, publish listings to eBay and your other channels, update inventory and prices, manage orders, run bulk edits and CSV imports, and answer buyer messages, all through your own 3Dsellers account.
 
-This repository holds the documentation and config examples. The server itself is hosted by 3Dsellers, so there is no code to run.
+This repository holds the documentation, config examples, a Claude Code plugin and the small npm bridge in [`npm/`](npm/). The server itself is hosted by 3Dsellers.
+
+## Why 3Dsellers MCP
+
+- **No eBay developer account, no API keys.** Sign in with your 3Dsellers login (OAuth). Local eBay MCP servers ask you to create an eBay developer app, an App ID, a Cert ID, a RuName and a user token.
+- **More than eBay.** One connection covers eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop, from one product catalog.
+- **More than the eBay API.** Buyer messages, eBay returns, inquiries and cases in one Helpdesk inbox, plus bulk actions, CSV imports, automations and offer rules.
+- **Works on the web.** claude.ai and ChatGPT connect with a URL. Local servers work only in desktop apps.
+- **Maintained for you.** When eBay changes its API, 3Dsellers updates the server. Support is included in every plan.
 
 ## Contents
 
+- [Why 3Dsellers MCP](#why-3dsellers-mcp)
 - [Features](#features)
 - [Demo](#demo)
 - [Quick start](#quick-start)
@@ -38,6 +48,7 @@ This repository holds the documentation and config examples. The server itself i
 - [Claude Code plugin](#claude-code-plugin)
 - [MCP client compatibility](#mcp-client-compatibility)
 - [What you can ask](#what-you-can-ask)
+- [Ready-made prompts](#ready-made-prompts)
 - [Channels](#channels)
 - [Tools](#tools)
 - [Hosted vs a local open-source server](#hosted-vs-a-local-open-source-server)
@@ -50,7 +61,7 @@ This repository holds the documentation and config examples. The server itself i
 
 ## Features
 
-- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, eBay Promoted Listings campaigns, eBay payouts and fees, feedback, listing templates and buyer messages.
+- **170+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, eBay Promoted Listings campaigns, eBay payouts and fees, feedback, listing templates and buyer messages.
 - **eBay and five more channels:** eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop from one product catalog. Publish a product from one channel to another in one request.
 - **Hosted, nothing to install:** no Node.js, no Docker, no eBay developer account and no marketplace API keys. 3Dsellers keeps the server up to date when marketplace APIs change.
 - **Claude Code plugin:** one install adds the MCP server plus skills and slash commands for listings, orders, inventory, bulk edits and buyer messages. See [Claude Code plugin](#claude-code-plugin).
@@ -209,6 +220,24 @@ Add this to `.kiro/settings/mcp.json` (one workspace) or `~/.kiro/settings/mcp.j
 }
 ```
 
+#### Claude Desktop, Windsurf, Zed and other stdio clients (npm)
+
+For clients that start MCP servers as a local command, use the [`3dsellers-mcp`](https://www.npmjs.com/package/3dsellers-mcp) npm package. It is a small bridge to the hosted server: it has no tools of its own and stores nothing on disk. Requires Node.js 18 or later.
+
+```json
+{
+  "mcpServers": {
+    "3dsellers": {
+      "command": "npx",
+      "args": ["-y", "3dsellers-mcp"],
+      "env": { "THREEDSELLERS_TOKEN": "YOUR_TOKEN_HERE" }
+    }
+  }
+}
+```
+
+In Claude Desktop the file is `claude_desktop_config.json` (Settings > Developer > Edit Config). Claude Desktop can also connect without Node.js through Settings > Connectors, see [Claude](#claude-claudeai-claude-desktop).
+
 #### Other clients
 
 Windsurf, Codex CLI, Perplexity, Mistral Le Chat and any client that supports remote MCP servers over streamable HTTP use the same URL, `https://api.3dsellers.com/mcp`, and either the OAuth sign-in or the `Authorization: Bearer` header.
@@ -270,6 +299,7 @@ To try the plugin from a local clone without installing it: `claude --plugin-dir
 | Cline | `cline_mcp_settings.json` | Bearer token |
 | Gemini CLI | `gemini extensions install https://github.com/3dsellers/ebay-mcp-server` | OAuth or bearer token |
 | Kiro | `.kiro/settings/mcp.json` | OAuth |
+| Windsurf, Zed and other stdio clients | npm package [`3dsellers-mcp`](npm/) | Bearer token |
 | Windsurf, Codex CLI, Perplexity, Mistral Le Chat | Server URL `https://api.3dsellers.com/mcp` | OAuth or bearer token |
 
 The server uses streamable HTTP and supports OAuth 2.0 with dynamic client registration, so clients that support MCP sign-in find the login page by themselves.
@@ -296,11 +326,15 @@ The server uses streamable HTTP and supports OAuth 2.0 with dynamic client regis
 
 Tools that change data ask for your approval before they run.
 
+## Ready-made prompts
+
+Copy-and-paste prompts for daily work are in [`prompts/`](prompts/): a morning check, listing a product, cross-listing, item specifics, stock, bulk prices, buyer messages, Promoted Listings, a supplier CSV, a weekly report and a monthly eBay money check. Each one reads first and asks before it changes anything.
+
 ## Channels
 
 One connection covers every channel connected to your 3Dsellers account. The AI works through 3Dsellers, so you do not need a developer account or API keys for any marketplace.
 
-- **eBay MCP server:** create, revise and publish listings, item specifics, business policies, store categories, offers to watchers, Promoted Listings campaigns, listing templates, orders and buyer messages.
+- **eBay MCP server:** create, revise and publish listings, item specifics, business policies, store categories, offers to watchers, Promoted Listings campaigns, listing templates, orders, buyer messages, feedback, payouts and selling limits.
 - **Amazon MCP server:** publish catalog products to Amazon, update inventory and prices, and manage orders.
 - **Walmart MCP server:** publish products to Walmart, update inventory and prices, and manage orders.
 - **Etsy MCP server:** publish products to Etsy, update inventory and prices, and manage orders.
@@ -310,7 +344,7 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 
 ## Tools
 
-120+ tools, grouped by area. **Read** tools only look at your data. **Write** tools make changes, and the assistant asks for your approval before it runs them.
+170+ tools, grouped by area. **Read** tools only look at your data. **Write** tools make changes, and the assistant asks for your approval before it runs them.
 
 ### Products & Catalog
 
@@ -581,6 +615,7 @@ Some eBay MCP servers on GitHub run on your own computer and call the eBay API d
 | | 3Dsellers MCP | Local open-source eBay MCP |
 | --- | --- | --- |
 | Setup | Sign in to 3Dsellers. Nothing to install. | Install Node.js or Python and run it on your computer |
+| What you set up first | A 3Dsellers account | An eBay developer app, keys and a user token |
 | eBay developer account | Not needed | Needed |
 | eBay app keys, RuName and token refresh | Not needed | You create and maintain them |
 | Sign in from a chat app (OAuth) | Yes | No |
@@ -591,6 +626,7 @@ Some eBay MCP servers on GitHub run on your own computer and call the eBay API d
 | One catalog for every channel | Yes | No |
 | Bulk actions and CSV imports | Yes | No |
 | Helpdesk and buyer messages | Yes | No |
+| eBay returns, inquiries and cases | In the Helpdesk, next to buyer messages | Usually not included |
 | Automations and offer rules | Yes | No |
 | Token scopes, request log and one-click revoke | Yes | No |
 | Rate limits shown live, with `Retry-After` | Yes | Handle eBay `429` errors yourself |
@@ -685,8 +721,11 @@ Any assistant that supports remote MCP servers: Claude, ChatGPT, Grok, Claude Co
 **Is there a REST API too?**
 Yes. The same account and token work with the [3Dsellers REST API](https://www.3dsellers.com/channel-integration/3dsellers-api). Reference: [api.3dsellers.com/docs](https://api.3dsellers.com/docs).
 
+**Is there an npm package?**
+Yes, [`3dsellers-mcp`](https://www.npmjs.com/package/3dsellers-mcp), for MCP clients that run servers as a local command. Clients that support remote servers do not need it.
+
 **Is this repository the server's source code?**
-No. The server is hosted and maintained by 3Dsellers. This repository contains documentation and config examples only.
+No. The server is hosted and maintained by 3Dsellers. This repository contains documentation, config examples, the Claude Code plugin and the source of the `3dsellers-mcp` npm bridge.
 
 ## Links
 
@@ -694,6 +733,7 @@ No. The server is hosted and maintained by 3Dsellers. This repository contains d
 - Setup guide: [How to connect AI agents to 3Dsellers using MCP](https://help.3dsellers.com/en/articles/15433466-how-to-connect-ai-agents-to-3dsellers-using-mcp)
 - Tokens, request log and rate limits: [Help Center article](https://help.3dsellers.com/en/articles/17582017-api-mcp-page-tokens-request-log-and-rate-limits)
 - REST API: [api.3dsellers.com/docs](https://api.3dsellers.com/docs)
+- npm package: [3dsellers-mcp](https://www.npmjs.com/package/3dsellers-mcp)
 - Video: [3Dsellers MCP in under eight minutes](https://www.youtube.com/watch?v=hqkb0MN3nak)
 - Official MCP Registry: `com.3dsellers/mcp`
 - Support: support@3dsellers.com
