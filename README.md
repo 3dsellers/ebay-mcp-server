@@ -50,7 +50,7 @@ This repository holds the documentation and config examples. The server itself i
 
 ## Features
 
-- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, listing templates and buyer messages.
+- **120+ ecommerce tools:** products, listings, item specifics, inventory, prices, orders, tracking, bulk actions, CSV imports, exports, automations, offer rules, eBay Promoted Listings campaigns, listing templates and buyer messages.
 - **eBay and five more channels:** eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop from one product catalog. Publish a product from one channel to another in one request.
 - **Hosted, nothing to install:** no Node.js, no Docker, no eBay developer account and no marketplace API keys. 3Dsellers keeps the server up to date when marketplace APIs change.
 - **Claude Code plugin:** one install adds the MCP server plus skills and slash commands for listings, orders, inventory, bulk edits and buyer messages. See [Claude Code plugin](#claude-code-plugin).
@@ -287,6 +287,7 @@ The server uses streamable HTTP and supports OAuth 2.0 with dynamic client regis
 | CSV import | "Import this supplier file, do a dry run first, then show me the rejected rows." |
 | Helpdesk | "Show unread buyer messages and draft a reply to each one." |
 | Automations | "Tag every order over $100 as VIP." |
+| eBay ads | "Show my Promoted Listings campaigns with their ad fees and sales, and pause the ones with no sales." |
 | Reports | "Export all active listings with price and quantity every Monday." |
 
 Tools that change data ask for your approval before they run.
@@ -295,7 +296,7 @@ Tools that change data ask for your approval before they run.
 
 One connection covers every channel connected to your 3Dsellers account. The AI works through 3Dsellers, so you do not need a developer account or API keys for any marketplace.
 
-- **eBay MCP server:** create, revise and publish listings, item specifics, business policies, store categories, offers to watchers, listing templates, orders and buyer messages.
+- **eBay MCP server:** create, revise and publish listings, item specifics, business policies, store categories, offers to watchers, Promoted Listings campaigns, listing templates, orders and buyer messages.
 - **Amazon MCP server:** publish catalog products to Amazon, update inventory and prices, and manage orders.
 - **Walmart MCP server:** publish products to Walmart, update inventory and prices, and manage orders.
 - **Etsy MCP server:** publish products to Etsy, update inventory and prices, and manage orders.
@@ -478,6 +479,25 @@ One connection covers every channel connected to your 3Dsellers account. The AI 
 | `create-offer-rule` | Send automatic offers to buyers who watch your listings. | Write |
 | `update-offer-rule` | Change the discount or timing of an offer rule. | Write |
 | `delete-offer-rule` | Delete an offer rule. | Write |
+
+### eBay Ads (Promoted Listings)
+
+| Tool | What it does | Type |
+| --- | --- | --- |
+| `get-ad-campaigns` | List your Promoted Listings campaigns with clicks, sales, ad fees and ROAS. | Read |
+| `get-ad-campaign` | Get one campaign, read live from eBay. | Read |
+| `get-campaign-ads` | List the listings promoted in a campaign and the ad rate of each. | Read |
+| `get-ads-eligibility` | Check which eBay advertising programs an account can use. | Read |
+| `create-ad-campaign` | Create a General campaign with a fixed or dynamic ad rate. | Write |
+| `update-ad-campaign` | Change the name, dates or ad rate of a campaign. | Write |
+| `set-ad-campaign-status` | Pause or resume a campaign. | Write |
+| `end-ad-campaign` | End a campaign for good. | Write |
+| `delete-ad-campaign` | Delete an ended campaign. | Write |
+| `remove-campaign-ads` | Take listings out of a campaign. | Write |
+| `update-campaign-ad-rates` | Set a new ad rate for listings in a campaign. | Write |
+| `sync-ad-campaigns` | Refresh your campaigns from eBay. | Write |
+
+To add listings to a campaign, use `create-action` with the `node_listing_tool_promote_items` action. For results per listing or per day, use `create-export` with the eBay Ad Report. Priority (cost per click) campaigns can be listed, paused, resumed and ended here; create and edit them in eBay Seller Hub.
 
 ### Listing Designer
 
