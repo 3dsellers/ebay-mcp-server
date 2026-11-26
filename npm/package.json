@@ -1,0 +1,53 @@
+{
+  "name": "3dsellers-mcp",
+  "version": "1.0.1",
+  "description": "Connect Claude Desktop, Windsurf, Cline, Zed or any stdio MCP client to the hosted 3Dsellers MCP server for eBay, Amazon, Walmart, Etsy, Shopify and TikTok Shop sellers. 170+ tools. No eBay developer account.",
+  "mcpName": "com.3dsellers/mcp",
+  "type": "module",
+  "bin": {
+    "3dsellers-mcp": "bin/3dsellers-mcp.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ebay",
+    "ebay-mcp",
+    "ebay-api",
+    "amazon",
+    "walmart",
+    "etsy",
+    "shopify",
+    "tiktok-shop",
+    "ecommerce",
+    "multichannel",
+    "claude",
+    "claude-desktop",
+    "cursor",
+    "windsurf",
+    "ai-agents",
+    "3dsellers"
+  ],
+  "homepage": "https://www.3dsellers.com/channel-integration/3dsellers-mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3dsellers/ebay-mcp-server.git",
+    "directory": "npm"
+  },
+  "bugs": {
+    "email": "support@3dsellers.com"
+  },
+  "author": "3Dsellers Ltd",
+  "license": "MIT"
+}
