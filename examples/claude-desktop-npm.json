@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "3dsellers": {
+      "command": "npx",
+      "args": ["-y", "3dsellers-mcp"],
+      "env": { "THREEDSELLERS_TOKEN": "YOUR_TOKEN_HERE" }
+    }
+  }
+}
