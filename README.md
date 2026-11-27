@@ -19,6 +19,7 @@
 ![Auth](https://img.shields.io/badge/auth-OAuth%20%7C%20bearer%20token-green)
 
 [![3Dsellers MCP connector on Glama](https://glama.ai/mcp/connectors/com.3dsellers/mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.3dsellers/mcp)
+[![3dsellers/ebay-mcp-server MCP server](https://glama.ai/mcp/servers/3dsellers/ebay-mcp-server/badges/score.svg)](https://glama.ai/mcp/servers/3dsellers/ebay-mcp-server)
 
 Server URL:
 
